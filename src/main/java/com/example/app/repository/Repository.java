@@ -1,5 +1,7 @@
 package com.example.app.repository;
 
+import com.example.app.model.Author;
+import com.example.app.model.AuthorMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
@@ -19,5 +21,8 @@ public class Repository {
 
     public List<String> getListOfNames(){
         return jdbcTemplate.queryForList("select name from authors", String.class);
+    }
+
+    public List<Author> getListOfAuthors() { return jdbcTemplate.query("select * from authors", new AuthorMapper());
     }
 }

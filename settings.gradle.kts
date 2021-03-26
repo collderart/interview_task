@@ -1,2 +1,2 @@
-rootProject.name = "database"
+rootProject.name = "interview_task"
 

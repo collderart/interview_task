@@ -1,8 +1,11 @@
 package com.example.app.service;
 
+import com.example.app.model.Author;
 import com.example.app.repository.Repository;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class DbProcessor implements InitializingBean {
@@ -22,6 +25,11 @@ public class DbProcessor implements InitializingBean {
             System.out.print(name + " ");
         }
         System.out.println();
+
+        List<Author> authors = repository.getListOfAuthors();
+        for (var author: authors) {
+            System.out.println(author.toString());
+        }
     }
 
     public DbProcessor(Repository repository) {

@@ -1,12 +1,14 @@
 package com.example.app.model;
 
-import java.time.LocalDateTime;
-
-public class ScheduledEntry {
-
+public class Book {
     private long id;
     private String name;
-    private LocalDateTime time;
+
+    public Book(long id, String name, int price) {
+        this.id = id;
+        this.name = name;
+        this.price = price;
+    }
 
     public long getId() {
         return id;
@@ -24,11 +26,13 @@ public class ScheduledEntry {
         this.name = name;
     }
 
-    public LocalDateTime getTime() {
-        return time;
+    public int getPrice() {
+        return price;
     }
 
-    public void setTime(LocalDateTime time) {
-        this.time = time;
+    public void setPrice(int price) {
+        this.price = price;
     }
+
+    private int price;
 }

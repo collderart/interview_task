@@ -1,5 +1,7 @@
 package com.example.app.config;
 
+import com.example.app.model.Author;
+import com.example.app.model.AuthorMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -7,6 +9,8 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
 import javax.sql.DataSource;
+import java.util.LinkedList;
+import java.util.List;
 
 @Configuration
 public class SpringJdbcConfig {
@@ -24,4 +28,6 @@ public class SpringJdbcConfig {
     public JdbcTemplate jdbcTemplate() {
         return new JdbcTemplate(mysqlDataSource());
     }
+
+
 }
