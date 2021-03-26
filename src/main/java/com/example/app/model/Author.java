@@ -17,8 +17,6 @@ public class Author {
                 '}';
     }
 
-    //private LocalDateTime time;
-
     public long getId() {
         return id;
     }
