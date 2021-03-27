@@ -1,12 +1,14 @@
 package com.example.app.model;
 
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 
 public class Author {
 
     private long id;
     private String name;
     private int books_count;
+    private LocalDateTime date_time;
 
     @Override
     public String toString() {
@@ -14,6 +16,7 @@ public class Author {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", books_count=" + books_count +
+                ", date " + date_time.truncatedTo(ChronoUnit.SECONDS) +
                 '}';
     }
 
@@ -39,11 +42,11 @@ public class Author {
         this.books_count = books_count;
     }
 
-    //    public LocalDateTime getTime() {
-//        return time;
-//    }
-//
-//    public void setTime(LocalDateTime time) {
-//        this.time = time;
-//    }
+    public LocalDateTime getDate_time() {
+      return date_time;
+    }
+
+    public void setDate_time(LocalDateTime date_time) {
+        this.date_time = date_time;
+    }
 }

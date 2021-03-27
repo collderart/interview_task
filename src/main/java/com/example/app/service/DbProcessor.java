@@ -1,6 +1,7 @@
 package com.example.app.service;
 
 import com.example.app.model.Author;
+import com.example.app.model.Book;
 import com.example.app.repository.Repository;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.stereotype.Service;
@@ -26,8 +27,12 @@ public class DbProcessor implements InitializingBean {
         }
         System.out.println();
 
-        List<Author> authors = repository.getListOfAuthors();
+        List<Author> authors = repository.getListOfAuthorsSortedByDate();
         for (var author: authors) {
+            System.out.println(author.toString());
+        }
+        List<Book> books = repository.getListOfBooks();
+        for (var author: books) {
             System.out.println(author.toString());
         }
     }

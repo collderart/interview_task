@@ -2,6 +2,8 @@ package com.example.app.repository;
 
 import com.example.app.model.Author;
 import com.example.app.model.AuthorMapper;
+import com.example.app.model.Book;
+import com.example.app.model.BookMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
@@ -23,6 +25,13 @@ public class Repository {
         return jdbcTemplate.queryForList("select name from authors", String.class);
     }
 
-    public List<Author> getListOfAuthors() { return jdbcTemplate.query("select * from authors", new AuthorMapper());
-    }
+    public List<Author> getListOfAuthors() { return jdbcTemplate.query("select * from authors", new AuthorMapper()); }
+
+    public List<Book> getListOfBooks() { return  jdbcTemplate.query("select * from books", new BookMapper()); }
+
+    public List<Book> getListOfBooksSortedByDate() { return  jdbcTemplate.query("select * from books order by date_time", new BookMapper()); }
+
+    public List<Book> getListOfBooksSortedByGenre() { return  jdbcTemplate.query("select * from books order by genre", new BookMapper()); }
+
+    public List<Author> getListOfAuthorsSortedByDate() { return jdbcTemplate.query("select * from authors order by date_time", new AuthorMapper()); }
 }
