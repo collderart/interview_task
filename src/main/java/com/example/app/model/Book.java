@@ -22,8 +22,8 @@ public class Book {
         return genre;
     }
 
-    public void setGenre(String genre) {
-        this.genre = Genre.valueOf(genre);
+    public void setGenre(Genre genre) {
+        this.genre = genre;
     }
 
     @Override

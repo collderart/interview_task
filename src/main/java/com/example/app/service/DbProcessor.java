@@ -31,10 +31,10 @@ public class DbProcessor implements InitializingBean {
         for (var author: authors) {
             System.out.println(author.toString());
         }
-        List<Book> books = repository.getListOfBooks();
-        for (var author: books) {
-            System.out.println(author.toString());
-        }
+//        List<Book> books = repository.getListOfBooks();
+//        for (var author: books) {
+//            System.out.println(author.toString());
+//        }
     }
 
     public DbProcessor(Repository repository) {

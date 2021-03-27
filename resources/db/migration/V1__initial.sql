@@ -1,7 +1,7 @@
 DROP TABLE IF EXISTS books;
 DROP TABLE IF EXISTS authors;
 
-CREATE TYPE genres AS ENUM ('Classic', 'Nonfiction', 'Fantasy', 'Detective', 'Education' );
+--CREATE TYPE genres AS ENUM ('Classic', 'Nonfiction', 'Fantasy', 'Detective', 'Education' );
 
 CREATE TABLE authors (
 id BIGSERIAL PRIMARY KEY,
@@ -13,7 +13,7 @@ CREATE TABLE books (
 id BIGSERIAL PRIMARY KEY,
 author_id BIGINT REFERENCES authors(id),
 name VARCHAR(50) NOT NULL,
-genre genres,
+genre VARCHAR(50),
 price INT,
 date_time TIMESTAMP);
 
