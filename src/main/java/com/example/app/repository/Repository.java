@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 @Component
+@org.springframework.stereotype.Repository
 public class Repository {
     private final JdbcTemplate jdbcTemplate;
 
@@ -34,5 +35,10 @@ public class Repository {
     public List<Book> getListOfBooksSortedByGenre() { return  jdbcTemplate.query("select * from books order by genre", new BookMapper()); }
 
     public List<Author> getListOfAuthorsSortedByDate() { return jdbcTemplate.query("select * from authors order by date_time", new AuthorMapper()); }
+
+    public void addBook (String title, String genre, String author) {
+        jdbcTemplate.update("insert into authors (name) values (?);");
+        jdbcTemplate.update("insert into books (title, genre, author, price) values (? , ?, (select currval(pg_get_serial_sequence('authors, id')), ?)");
+    }
 
 }

@@ -1,10 +1,8 @@
 package com.example.app.model;
 
-import javax.persistence.Entity;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 
-//@Entity
 public class Author {
 
     private long id;

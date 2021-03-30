@@ -9,3 +9,5 @@ import org.springframework.context.annotation.Configuration;
         "com.example.app.repository"})
 public class ServiceConfiguration {
 }
+
+

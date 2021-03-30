@@ -9,8 +9,6 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
 import javax.sql.DataSource;
-import java.util.LinkedList;
-import java.util.List;
 
 @Configuration
 public class SpringJdbcConfig {
@@ -28,6 +26,5 @@ public class SpringJdbcConfig {
     public JdbcTemplate jdbcTemplate() {
         return new JdbcTemplate(mysqlDataSource());
     }
-
 
 }

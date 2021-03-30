@@ -2,7 +2,6 @@ package com.example.app.model;
 
 import org.springframework.jdbc.core.RowMapper;
 
-import java.awt.geom.GeneralPath;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
@@ -12,7 +11,7 @@ public class BookMapper implements RowMapper<Book> {
     public Book mapRow(ResultSet rs, int rowNum) throws SQLException {
         Book res = new Book();
         res.setId(rs.getLong("id"));
-        res.setName(rs.getString("name"));
+        res.setTitle(rs.getString("name"));
         res.setAuthor(rs.getString("author"));
         res.setPrice(rs.getInt("price"));
         res.setGenre(Book.Genre.valueOf(rs.getString("genre")));

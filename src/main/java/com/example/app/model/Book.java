@@ -4,11 +4,36 @@ import java.time.LocalDateTime;
 
 public class Book {
     private long id;
-    private String name;
+    private String title;
     private String author;
     private int price;
     private Genre genre;
     private LocalDateTime date_time;
+
+
+
+    enum Genre {
+        CLASSIC ("Classic"),
+        NONFICTION ("Nonfiction"),
+        FANTASY ("Fantasy"),
+        DETECTIVE ("Detective"),
+        EDUCATION ("Education");
+
+        private String genreName;
+
+        Genre(String genreName){ this.genreName = genreName; }
+        public String getGenreName() { return genreName;}
+    }
+
+    @Override
+    public String toString() {
+        return "Book{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", author='" + author + '\'' + ", genre " + genre.genreName +
+                ", price=" + price + ", date " + date_time +
+                '}';
+    }
 
     public LocalDateTime getDate_time() {
         return date_time;
@@ -24,16 +49,6 @@ public class Book {
 
     public void setGenre(Genre genre) {
         this.genre = genre;
-    }
-
-    @Override
-    public String toString() {
-        return "Book{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", author='" + author + '\'' + ", genre " + genre.title +
-                ", price=" + price + ", date " + date_time +
-                '}';
     }
 
     public String getAuthor() {
@@ -52,12 +67,12 @@ public class Book {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getTitle() {
+        return title;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public int getPrice() {
@@ -68,16 +83,5 @@ public class Book {
         this.price = price;
     }
 
-    enum Genre {
-        CLASSIC ("Classic"),
-        NONFICTION ("Nonfiction"),
-        FANTASY ("Fantasy"),
-        DETECTIVE ("Detective"),
-        EDUCATION ("Education");
 
-        private String title;
-
-        Genre(String title){ this.title = title; }
-        public String getTitle() { return title;}
-    }
 }
