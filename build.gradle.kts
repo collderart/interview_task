@@ -12,12 +12,10 @@ repositories {
 }
 
 dependencies {
-    implementation("android.arch.persistence.room:runtime:1.1.1")
     compile("au.com.bytecode:opencsv:2.4")
     testCompile("junit", "junit", "4.12")
     implementation("org.springframework.boot:spring-boot-starter-jdbc")
     implementation("org.postgresql:postgresql:42.2.2")
     implementation ("org.springframework.boot:spring-boot-starter-thymeleaf")
     implementation ("org.springframework.boot:spring-boot-starter-web")
-    annotationProcessor("android.arch.persistence.room:compiler:1.1.1")
 }

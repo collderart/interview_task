@@ -1,16 +1,35 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Getting Started: Handing Form Submission</title>
+    <title>List of Books</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-
-<h2 style="display: inline"><a href="/">Add book </a></h2>
-<h1 style="display: inline"> List of Books</h1>
-
-<tr>
-
-<a href="/">Submit another message</a>
+<h2 style="display: inline-block"><a href="/book">Add book </a> </h2>
+<h2 style="display: inline"><a href="/listauthors"> List of Authors </a></h2>
+<h1 style="display: inline"> List of Books </h1>
+<h2 style="display: inline"><a href="/search"> Search Books By Author</a></h2>
+<form action="#" th:action="@{/listbooks}" th:object="${listbooks}" method="get">
+    <table border=2 style="display: inline-block">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Author</th>
+            <th>Genre</th>
+            <th>Date added to DB</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="book : ${listbooks}">
+            <td th:text="${book.id}"></td>
+            <td th:text="${book.title}"></td>
+            <td th:text="${book.author_name}"></td>
+            <td th:text="${book.genre}"></td>
+            <td th:text="${book.date_time}"></td>
+        </tr>
+        </tbody>
+    </table>
+</form>
 </body>
 </html>

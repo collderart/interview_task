@@ -1,16 +1,27 @@
 package com.example.app.model;
 
+import javax.validation.constraints.NotBlank;
 import java.time.LocalDateTime;
 
 public class Book {
     private long id;
+    @NotBlank(message = "Please, enter the title")
     private String title;
-    private String author;
+    private long author_id;
+    @NotBlank(message = "Please, enter the author name")
+    private String author_name;
     private int price;
     private Genre genre;
     private LocalDateTime date_time;
 
 
+    public long getAuthor_id() {
+        return author_id;
+    }
+
+    public void setAuthor_id(long author_id) {
+        this.author_id = author_id;
+    }
 
     enum Genre {
         CLASSIC ("Classic"),
@@ -22,6 +33,7 @@ public class Book {
         private String genreName;
 
         Genre(String genreName){ this.genreName = genreName; }
+        public void setGenreName(String genreName) { this.genreName = genreName; }
         public String getGenreName() { return genreName;}
     }
 
@@ -30,7 +42,7 @@ public class Book {
         return "Book{" +
                 "id=" + id +
                 ", title='" + title + '\'' +
-                ", author='" + author + '\'' + ", genre " + genre.genreName +
+                ", author='" + author_name + '\'' + ", genre " + genre.genreName +
                 ", price=" + price + ", date " + date_time +
                 '}';
     }
@@ -51,12 +63,18 @@ public class Book {
         this.genre = genre;
     }
 
-    public String getAuthor() {
-        return author;
+    public String getGenreName() {
+        return genre.getGenreName();
     }
 
-    public void setAuthor(String author) {
-        this.author = author;
+    public void setGenreName(String genreName){ genre.setGenreName(genreName);}
+
+    public String getAuthor_name() {
+        return author_name;
+    }
+
+    public void setAuthor_name(String author_name) {
+        this.author_name = author_name;
     }
 
     public long getId() {
