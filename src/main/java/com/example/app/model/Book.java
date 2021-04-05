@@ -2,6 +2,7 @@ package com.example.app.model;
 
 import javax.validation.constraints.NotBlank;
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 public class Book {
     private long id;
@@ -74,7 +75,11 @@ public class Book {
     }
 
     public void setAuthor_name(String author_name) {
+        if (author_name == null || author_name.equals("")){
+            throw new RuntimeException("The name must be filled or not empty");
+        } else {
         this.author_name = author_name;
+        }
     }
 
     public long getId() {
@@ -90,7 +95,11 @@ public class Book {
     }
 
     public void setTitle(String title) {
+        if (title == null || title.equals("")){
+            throw new RuntimeException("The title must be filled or not empty");
+        } else {
         this.title = title;
+        }
     }
 
     public int getPrice() {
@@ -101,5 +110,17 @@ public class Book {
         this.price = price;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Book book = (Book) o;
+        return title.equals(book.title) && author_name.equals(book.author_name) && genre == book.genre;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(title, author_name, genre);
+    }
 
 }

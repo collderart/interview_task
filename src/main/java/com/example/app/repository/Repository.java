@@ -33,6 +33,8 @@ public class Repository {
 
     public List<Book> getAllBooks() { return  jdbcTemplate.query("select * from books", new BookMapper()); }
 
+
+
     public List<Book> getListOfBooksSortedByDate() { return  jdbcTemplate.query(
             "select distinct on (books.date_time) books.*, authors.name from authors inner join books on books.author_id = authors.id order by books.date_time;", new BookMapper()); }
 
