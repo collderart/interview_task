@@ -10,33 +10,34 @@
 <h2 style="display: inline"><a href="/listauthors"> List Of Authors </a></h2>
 <h2 style="display: inline-block"><a href="/listbooks"> List of Books </a></h2>
 <h1 style="display: inline"> Search Books By Author</h1>
-
 <form action="#" th:action="@{/search}" th:object="${search}" method="get">
-
     <table border=2 style="display: inline-block">
-<!--        <thead>-->
-<!--        <tr>-->
-<!--            <th>ID</th>-->
-<!--            <th>Name</th>-->
-<!--            <th>Author</th>-->
-<!--            <th>Genre</th>-->
-<!--            <th>Date added to DB</th>-->
-<!--        </tr>-->
-<!--        </thead>-->
-<!--        <tbody>-->
-<!--        <tr th:each="book : ${search}">-->
-<!--            <td th:text="${book.id}"></td>-->
-<!--            <td th:text="${book.title}"></td>-->
-<!--            <td th:text="${book.author_name}"></td>-->
-<!--            <td th:text="${book.genre}"></td>-->
-<!--            <td th:text="${book.date_time}"></td>-->
-<!--        </tr>-->
-<!--        </tbody>-->
-<!--    </table>-->
-<!--    <input type="text" th:field="*{author_name}"/>-->
-<!--    <td>-->
-<!--        <input type="submit" value="Submit" />-->
-<!--    </td>-->
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Author</th>
+            <th>Genre</th>
+            <th>Date added to DB</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="book : ${search}">
+            <td th:text="${book.id}"></td>
+            <td th:text="${book.title}"></td>
+            <td th:text="${book.author_name}"></td>
+            <td th:text="${book.genre}"></td>
+            <td th:text="${book.date_time}"></td>
+        </tr>
+        </tbody>
+    </table>
+</form>
+<form action="#" th:action="@{/search}" th:object="${search}" method="post">
+    <input type="text" th:field="${search.author_name}"/>
+    <td>
+        <input type="submit" value="Search" />
+    </td>
+</form>
 <!--    <table border=2 style="display: inline-block">-->
 <!--        <thead>-->
 <!--        <tr>-->
@@ -57,11 +58,11 @@
 <!--        </tr>-->
 <!--        </tbody>-->
 <!--    </table>-->
-<!--    <input type="text" th:field="*{title}"/>-->
+<!--&lt;!&ndash;    <input type="text" th:field="${book.title}"/>&ndash;&gt;-->
 <!--    <td>-->
-<!--        <input type="submit" value="Submit" />-->
+<!--        <input type="submit" value="Search" />-->
 <!--    </td>-->
-</form>
+
 
 
 </body>

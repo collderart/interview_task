@@ -4,6 +4,7 @@ import com.example.app.model.Book;
 import com.example.app.repository.Repository;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.ConcurrentModel;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,7 +32,7 @@ private final Repository repository;
         return "book";
     }
 
-    @PostMapping(value = "/book"/*, params = {"add"}*/)
+    @PostMapping(value = "/book")
     public String bookSubmit(@ModelAttribute Book book, Model model) {
         List<Book> books = repository.getAllBooks();
             if (books.contains(book)) {
@@ -39,24 +40,22 @@ private final Repository repository;
             } else {
                 repository.addBook(book);
             }
-        //final var ra = new RedirectAttributesModelMap();
-        //ra.addFlashAttribute("Success", "Book has been added.");
         model.addAttribute("book", book);
-
         System.out.println("New book is " + book.toString());
         return "redirect:/book";
     }
 
-    @GetMapping("/search")
-    public String searchBookByAuthor(@ModelAttribute String string, Model model) {
-        List<Book> books = repository.getAllBooks();
-        List<Book> res = new ArrayList<>();
-        for (Book book : books) {
-            if (book.getAuthor_name().equals(string)) {
-                res.add(book);
-            }
-        }
-        model.addAttribute("search", string);
+    @GetMapping(value = "/search")
+    public String searchForm(Model model){
+        model.addAttribute("search", new Book());
+        return "search";
+    }
+
+    @PostMapping(value = "/search")
+    public String searchBookByAuthor(@RequestParam String author_name, Model model) {
+        var res = repository.searchByAuthor(author_name);
+        System.out.println("result " + res.toString());
+        model.addAttribute("author_name", res);
         return "redirect:/search";
     }
 

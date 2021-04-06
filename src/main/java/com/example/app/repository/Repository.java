@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Component
@@ -50,6 +51,19 @@ public class Repository {
         jdbcTemplate.update("insert into authors (name) values (?) on conflict (name) do nothing", book.getAuthor_name());
         jdbcTemplate.update("insert into books (title, genre, author_id, author_name ) values (?, ?, ?, ?)",
                 book.getTitle(), book.getGenreName(), getAuthorId(book), book.getAuthor_name() );
+    }
+    public List<Book> searchByAuthor(String author_name) {
+        var tmp = getAllBooks();
+        tmp.removeIf( r -> !r.getAuthor_name().equals(author_name));
+
+//        List<Book> res = new ArrayList<>();
+//        for (Book book: tmp
+//             ) {
+//            if (book.getAuthor_name().equals(author_name)){
+//                res.add(book);
+//            }
+//        }
+        return tmp;
     }
     //    public void addBook (Book book) {
 //        jdbcTemplate.update("insert into books (title, genre, author, price) values (? , ?, (select currval(pg_get_serial_sequence('authors, id')), ?)");
