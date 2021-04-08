@@ -15,6 +15,16 @@ public class Book {
     private Genre genre;
     private LocalDateTime date_time;
 
+    public Book(@NotBlank(message = "Please, enter the title") String title,
+                @NotBlank(message = "Please, enter the author name") String author_name,
+                Genre genre) {
+        this.title = title;
+        this.author_name = author_name;
+        this.price = price;
+        this.genre = genre;
+    }
+
+    public Book() { }
 
     public long getAuthor_id() {
         return author_id;
@@ -24,12 +34,13 @@ public class Book {
         this.author_id = author_id;
     }
 
-    enum Genre {
+    public enum Genre {
         CLASSIC ("Classic"),
         NONFICTION ("Nonfiction"),
         FANTASY ("Fantasy"),
         DETECTIVE ("Detective"),
-        EDUCATION ("Education");
+        EDUCATION ("Education"),
+        NONE("No genre");
 
         private String genreName;
 
