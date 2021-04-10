@@ -4,8 +4,8 @@ import com.example.app.model.Author;
 import com.example.app.model.Book;
 import com.example.app.repository.Repository;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -26,7 +26,7 @@ public class REST_Controller {
 
     @PostMapping(value = "/book")
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<Book> bookAdd(Book book) {
+    public Book bookAdd(Book book) {
         List<Book> books = repository.getAllBooks();
         if (books.contains(book)) {
             throw new RuntimeException("This book already exists in database");
@@ -34,31 +34,31 @@ public class REST_Controller {
             repository.addBook(book);
         }
         System.out.println("New book is " + book.toString());
-        return ResponseEntity.ok(book);
+        return book;
     }
 
     @GetMapping(value = "/search")
     public String searchForm(){
         return "search";
     }
+
 //    @GetMapping("/listbooks")
 //    public List<Book> listAllBooks () {
 //        return repository.getAllBooks();
 //    }
 ////
-//    @PostMapping(value = "/search")
-//    public String searchBookByAuthor(@RequestParam String author_name, Model model) {
-//        var res = repository.searchByAuthor(author_name);
-//        System.out.println("result " + res.toString());
-//        model.addAttribute("author_name", res);
-//        return "redirect:/search";
-//    }
-//
+    @PostMapping(value = "/search")
+    public List<Book> searchBookByAuthor(@RequestParam String author_name) {
+        var res = repository.searchByAuthor(author_name);
+        System.out.println("result " + res.toString());
+        return res;
+    }
+
     @GetMapping("/listauthors")
     public List<Author> getAuthorsSortedByDate(){
         return repository.getListOfAuthorsSortedByDate();
     }
-//
+
     @GetMapping("/listbooks")
     public List<Book> getBooksSortedByName(){
         var res = new ArrayList<Book>(repository.getListOfBooksSortedByDate());
@@ -81,6 +81,18 @@ public class REST_Controller {
             }
         });
         return res ;
+    }
+
+    @GetMapping("/deletebyauthor")
+   // @ResponseStatus(value = HttpStatus.OK, reason = "List of deleted books:")
+    public List<Book> deleteBooksByAuthorDB(String author_name){
+        var res = repository.deleteBooksByAuthor(author_name);
+        if (res.size()==0){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Books by this author does not exist");
+        }
+        else {
+            return res;
+        }
     }
 }
 

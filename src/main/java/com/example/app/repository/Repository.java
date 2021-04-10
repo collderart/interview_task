@@ -65,7 +65,8 @@ public class Repository {
 //        }
         return tmp;
     }
-    //    public void addBook (Book book) {
-//        jdbcTemplate.update("insert into books (title, genre, author, price) values (? , ?, (select currval(pg_get_serial_sequence('authors, id')), ?)");
-//    }
+
+    public List<Book> deleteBooksByAuthor(String author_name) {
+        return jdbcTemplate.query("delete from books where author_name = ? returning *", new BookMapper(), author_name);
+    }
 }
