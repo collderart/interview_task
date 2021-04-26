@@ -6,21 +6,17 @@ import java.util.Objects;
 
 public class Book {
     private long id;
-    @NotBlank(message = "Please, enter the title")
     private String title;
     private long author_id;
-    @NotBlank(message = "Please, enter the author name")
     private String author_name;
     private int price;
     private Genre genre;
     private LocalDateTime date_time;
 
-    public Book(@NotBlank(message = "Please, enter the title") String title,
-                @NotBlank(message = "Please, enter the author name") String author_name,
-                Genre genre) {
+    public Book(String title, String author_name, Genre genre) {
         this.title = title;
         this.author_name = author_name;
-        this.price = price;
+        //this.price = price;
         this.genre = genre;
     }
 

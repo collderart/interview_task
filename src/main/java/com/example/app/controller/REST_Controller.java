@@ -4,6 +4,8 @@ import com.example.app.model.Author;
 import com.example.app.model.Book;
 import com.example.app.repository.Repository;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -19,12 +21,32 @@ public class REST_Controller {
         this.repository = repository;
     }
 
-    @GetMapping("/book")
-    public Book bookForm() {
-        return new Book("No title", "No Author", Book.Genre.NONE);
+    @GetMapping("/all")
+    public ResponseEntity<List<Book>> getAllBooks(){
+        return new ResponseEntity<>(repository.getAllBooks(), HttpStatus.OK);
+    }
+//    public Book bookForm() {
+//        return new Book("No title", "No Author", Book.Genre.NONE);
+//    }
+
+    @GetMapping("/detail/{id}")
+    public ResponseEntity<Book> getBook(@PathVariable long id){
+        Book book = repository.getBookById(id);
+        return new ResponseEntity<>(book, HttpStatus.OK);
     }
 
-    @PostMapping(value = "/book")
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteBook(@PathVariable long id) {
+        repository.deleteBook(id);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+    @PutMapping("/{id}")
+    public ResponseEntity<Book> updateBook(Book book){
+        repository.updateBook(book);
+        return new ResponseEntity<Book>(book, HttpStatus.OK);
+    }
+
+    @PostMapping(value = "/add")
     @ResponseStatus(HttpStatus.CREATED)
     public Book bookAdd(Book book) {
         List<Book> books = repository.getAllBooks();
@@ -34,12 +56,15 @@ public class REST_Controller {
             repository.addBook(book);
         }
         System.out.println("New book is " + book.toString());
+        book = repository.getLastBook();
         return book;
     }
 
-    @GetMapping(value = "/search")
-    public String searchForm(){
-        return "search";
+    @GetMapping(value = "/dashboard")
+    public List<Book> search(String title){
+        List<Book> tmp = repository.searchBookByTitle(title);
+        System.out.println("Search result : " + tmp.toString());
+        return tmp;
     }
 
 //    @GetMapping("/listbooks")
@@ -47,12 +72,12 @@ public class REST_Controller {
 //        return repository.getAllBooks();
 //    }
 ////
-    @PostMapping(value = "/search")
-    public List<Book> searchBookByAuthor(@RequestParam String author_name) {
-        var res = repository.searchByAuthor(author_name);
-        System.out.println("result " + res.toString());
-        return res;
-    }
+//    @PostMapping(value = "/search")
+//    public List<Book> searchBookByAuthor(@RequestParam String author_name) {
+//        var res = repository.searchByAuthor(author_name);
+//        System.out.println("result " + res.toString());
+//        return res;
+//    }
 
     @GetMapping("/listauthors")
     public List<Author> getAuthorsSortedByDate(){
@@ -83,16 +108,18 @@ public class REST_Controller {
         return res ;
     }
 
-    @GetMapping("/deletebyauthor")
-   // @ResponseStatus(value = HttpStatus.OK, reason = "List of deleted books:")
-    public List<Book> deleteBooksByAuthorDB(String author_name){
-        var res = repository.deleteBooksByAuthor(author_name);
-        if (res.size()==0){
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Books by this author does not exist");
-        }
-        else {
-            return res;
-        }
-    }
+
+
+//    @GetMapping("/deletebyauthor")
+//   // @ResponseStatus(value = HttpStatus.OK, reason = "List of deleted books:")
+//    public List<Book> deleteBooksByAuthorDB(String author_name){
+//        var res = repository.deleteBooksByAuthor(author_name);
+//        if (res.size()==0){
+//            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Books by this author does not exist");
+//        }
+//        else {
+//            return res;
+//        }
+//    }
 }
 
